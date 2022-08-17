@@ -4,10 +4,6 @@ import './App.css';
 import EventLine from './components/EventLine';
 
 function App() {
-    const [resultText, setResultText] = useState("Please enter your name below 👇");
-    const [name, setName] = useState('');
-    const updateName = (e: any) => setName(e.target.value);
-    const updateResultText = (result: string) => setResultText(result);
     const [data, setData] = useState(null);
 
     useEffect(() => {
@@ -19,8 +15,6 @@ function App() {
         fetchData();
     }, [])
 
-
-    console.log("Data: " + data);
 
     return (
         <div className='bg-dark-bg flex flex-col justify-start space-y-2 h-screen overflow-auto'>

@@ -1,13 +1,12 @@
 
 import { ClipboardCopyIcon, EyeIcon, EyeOffIcon } from '@heroicons/react/solid'
+import { displayInfo } from '../pages/Event'
 
 interface Props {
     id: string
     hidden: boolean
     link: any
-    setDisplayInfo: React.Dispatch<React.SetStateAction<{
-        lateral: boolean;
-    }>>
+    setDisplayInfo: React.Dispatch<React.SetStateAction<displayInfo>>
 }
 
 const InputOBS: React.FC<Props> = ({ id, hidden, link, setDisplayInfo }) => {

@@ -2,6 +2,7 @@ package websocket
 
 import (
 	"encoding/json"
+	"strings"
 )
 
 type SubscriptionType int16
@@ -28,6 +29,10 @@ type Hub struct {
 
 	// Unregister requests from clients.
 	unregister chan *Client
+
+	//display
+	master *Client
+	display []byte
 }
 
 func NewHub() *Hub {
@@ -57,19 +62,28 @@ func (h *Hub) Run() {
 				close(client.send)
 			}
 
-			/*for client := range h.clients {
-				msg := []byte("some one leave room (ID:" + clientId + ")")
-				client.send <- msg
-			}*/
+			if h.master == client {
+				h.master = nil
+				for client := range h.clients {
+					client.send <- []byte(`{"type":"display","body":{}}`)
+				}
+			}
 		case userMessage := <-h.broadcast:
 			var data map[string][]byte
+			
 			json.Unmarshal(userMessage.msj, &data)
-
 			for client := range h.clients {
+				if strings.Contains(string(data["message"][0:16]), "display") {
+					println(string(data["message"]))
+					h.master = client
+					h.display = data["message"]
+				}
+
 				//prevent self receive the message
 				if client.ID == string(data["id"]) {
 					continue
 				}
+
 				select {
 				case client.send <- data["message"]:
 				default:
