@@ -3,7 +3,6 @@ package main
 import (
 	"changeme/backend/websocket"
 	"context"
-	"fmt"
 	"net/http"
 
 	"github.com/gin-contrib/cors"
@@ -24,11 +23,6 @@ func NewApp() *App {
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
-}
-
-// Greet returns a greeting for the given name
-func (a *App) Greet(name string) string {
-	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
 
 // Start gin server with websocket

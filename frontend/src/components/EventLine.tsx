@@ -7,7 +7,6 @@ interface Props {
     event: any;
 }
 
-
 const EventLine: React.FC<Props> = ({ event }) => {
     return <tr className="w-full bg-dark-block justify-between font-semibold">
         <td className="w-10 h-10 relative">

@@ -74,7 +74,6 @@ func (h *Hub) Run() {
 			json.Unmarshal(userMessage.msj, &data)
 			for client := range h.clients {
 				if strings.Contains(string(data["message"][0:16]), "display") {
-					println(string(data["message"]))
 					h.master = client
 					h.display = data["message"]
 				}

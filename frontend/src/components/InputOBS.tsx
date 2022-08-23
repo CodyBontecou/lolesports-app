@@ -7,13 +7,16 @@ interface Props {
     hidden: boolean
     link: any
     setDisplayInfo: React.Dispatch<React.SetStateAction<displayInfo>>
+    showLink: boolean
 }
 
-const InputOBS: React.FC<Props> = ({ id, hidden, link, setDisplayInfo }) => {
+const InputOBS: React.FC<Props> = ({ id, hidden, link, setDisplayInfo, showLink }) => {
+    if (!showLink) { return <></> }
+
     return (
-        <div className='mx-3 px-1 flex bg-gray-800 w-fit rounded-md overflow-hidden'>
-            <input className="bg-gray-800 p-1 outline-0" readOnly={true} value={link}></input>
-            <button onClick={() => { navigator.clipboard.writeText(link) }} >
+        <div className='mx-3 px-1 flex bg-gray-800 w-fit rounded-md overflow-hidden self-center'>
+            <input className="bg-gray-800 p-1 outline-0 w-32 select-all" readOnly={true} value={`lolhub.gg/lolesports/${link}`}></input>
+            <button onClick={() => { navigator.clipboard.writeText(`lolhub.gg/lolesports/${link}`) }} >
                 <ClipboardCopyIcon className="h-6 w-6 text-palette-teal self-center" />
             </button>
             <button onClick={() => {
